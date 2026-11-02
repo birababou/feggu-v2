@@ -1,0 +1,55 @@
+@import 'tailwindcss';
+
+@source '../views';
+@source '../js';
+
+@theme {
+    --font-sans: 'Atkinson Hyperlegible', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Bricolage Grotesque', 'Atkinson Hyperlegible', ui-sans-serif, sans-serif;
+
+    --color-nuit: #241339;      /* violet nuit : texte fort, sections sombres */
+    --color-violet: #5a2d82;    /* violet FEGGU : liens, éléments actifs */
+    --color-violet-clair: #8a5cb8;
+    --color-lilas: #efe7f8;     /* panneaux doux */
+    --color-fond: #faf8fc;      /* fond de page */
+    --color-orange: #f0641e;    /* orange « Orange the World » : réservé à l'alerte */
+    --color-orange-fonce: #c94c0c;
+    --color-peche: #ffe8da;
+    --color-encre: #1f1530;
+    --color-gris: #6b6178;
+    --color-trait: #e2dcea;
+    --color-sur: #2f7d5b;       /* confirmation, sécurité */
+    --color-critique: #c0262d;
+    --color-haute: #e0661b;
+    --color-moyenne: #c99a06;
+    --color-basse: #7a8794;
+}
+
+@layer base {
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+        @apply bg-fond text-encre font-sans antialiased;
+        font-size: 1.0625rem;
+        line-height: 1.6;
+    }
+    h1, h2, h3 { @apply font-display text-nuit; line-height: 1.12; letter-spacing: -0.01em; }
+    :focus-visible { outline: 3px solid var(--color-orange); outline-offset: 2px; border-radius: 6px; }
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+}
+
+@utility btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 font-bold transition-colors disabled:opacity-50;
+}
+@utility btn-alerte { @apply btn bg-orange text-white hover:bg-orange-fonce; }
+@utility btn-violet { @apply btn bg-violet text-white hover:bg-nuit; }
+@utility btn-ligne { @apply btn border-2 border-violet text-violet hover:bg-lilas; }
+@utility btn-discret { @apply btn text-violet hover:bg-lilas; }
+@utility champ { @apply w-full rounded-xl border-2 border-trait bg-white px-4 py-3 text-encre placeholder:text-gris/70 focus:border-violet focus:outline-none disabled:bg-fond disabled:text-gris; }
+@utility etiquette { @apply mb-1.5 block font-bold text-nuit; }
+@utility puce {
+    @apply inline-flex cursor-pointer select-none items-center gap-2 rounded-full border-2 border-trait bg-white px-4 py-2.5 text-[0.98rem] transition-colors hover:border-violet-clair;
+    &[aria-pressed="true"] { @apply border-violet bg-lilas font-bold text-nuit; }
+}
+@utility carte { @apply rounded-2xl border border-trait bg-white; }
